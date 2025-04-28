@@ -1,0 +1,31 @@
+{
+  "name": "deq",
+  "version": "1.0.0",
+  "description": "Flashcard application with authentication",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.12.1",
+    "google-auth-library": "^7.9.1",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.7.1",
+    "pg-hstore": "^2.3.4"
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.1",
+    "nodemon": "^2.0.12"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
