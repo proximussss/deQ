@@ -3,6 +3,9 @@ const path = require('path');
 const cors = require('cors');
 const { pool } = require('./config/db');
 require('dotenv').config();
+const { initializeDatabase } = require('./config/db_init');
+
+initializeDatabase();  // <<< this must happen
 
 // Initialize express
 const app = express();
