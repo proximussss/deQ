@@ -1,22 +1,27 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import ThemeProvider from './theme/ThemeProvider';
-import store from './store';
-import setAuthToken from './utils/setAuthToken';
-import { loadUser } from './actions/auth';
+import React, { useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { Provider } from "react-redux";
+import ThemeProvider from "./theme/ThemeProvider";
+import store from "./store";
+import setAuthToken from "./utils/setAuthToken";
+import { loadUser } from "./actions/auth";
 
 // Components
-import Navbar from './components/layout/Navbar';
-import Alert from './components/layout/Alert';
-import Home from './components/pages/Home';
-import About from './components/pages/About';
-import Register from './components/auth/Register';
-import Login from './components/auth/Login';
-import ModuleSelect from './components/modules/ModuleSelect';
-import FlashcardModule from './components/flashcards/FlashcardModule';
-import SessionLogs from './components/sessions/SessionLogs';
-import PrivateRoute from './components/routing/PrivateRoute';
+import Navbar from "./components/layout/Navbar";
+import Alert from "./components/layout/Alert";
+import Home from "./components/pages/Home";
+import About from "./components/pages/About";
+import Register from "./components/auth/Register";
+import Login from "./components/auth/Login";
+import ModuleSelect from "./components/modules/ModuleSelect";
+import FlashcardModule from "./components/flashcards/FlashcardModule";
+import SessionLogs from "./components/sessions/SessionLogs";
+import PrivateRoute from "./components/routing/PrivateRoute";
 
 // Check for token
 if (localStorage.token) {
@@ -35,15 +40,24 @@ const App = () => {
           <Navbar />
           <div className="container">
             <Alert />
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/about" component={About} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
-              <PrivateRoute exact path="/modules" component={ModuleSelect} />
-              <PrivateRoute exact path="/module/:moduleName" component={FlashcardModule} />
-              <PrivateRoute exact path="/sessions" component={SessionLogs} />
-            </Switch>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+              <Route
+                path="/modules"
+                element={<PrivateRoute component={ModuleSelect} />}
+              />
+              <Route
+                path="/module/:moduleName"
+                element={<PrivateRoute component={FlashcardModule} />}
+              />
+              <Route
+                path="/sessions"
+                element={<PrivateRoute component={SessionLogs} />}
+              />
+            </Routes>
           </div>
         </Router>
       </ThemeProvider>

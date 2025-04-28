@@ -1,14 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import styled from 'styled-components';
-import { logout } from '../../actions/auth';
-import { toggleTheme } from '../../actions/theme';
+import React from "react";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import styled from "styled-components";
+import { logout } from "../../actions/auth";
+import { toggleTheme } from "../../actions/theme";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const { isAuthenticated, loading, user } = useSelector(state => state.auth);
-  const { darkMode } = useSelector(state => state.theme);
+  const { isAuthenticated, loading, user } = useSelector((state) => state.auth);
+  const { darkMode } = useSelector((state) => state.theme);
 
   const onLogout = () => {
     dispatch(logout());
@@ -58,10 +58,12 @@ const Navbar = () => {
           <Link to="/">Flashcards</Link>
         </h1>
         <div className="theme-toggle" onClick={onToggleTheme}>
-          {darkMode ? '☀️' : '🌙'}
+          {darkMode ? "☀️" : "🌙"}
         </div>
         {!loading && (
-          <div className="links">{isAuthenticated ? authLinks : guestLinks}</div>
+          <div className="links">
+            {isAuthenticated ? authLinks : guestLinks}
+          </div>
         )}
       </div>
     </NavbarContainer>
@@ -72,7 +74,7 @@ const NavbarContainer = styled.nav`
   background-color: ${({ theme }) => theme.primary};
   color: white;
   padding: 0.5rem 2rem;
-  
+
   .navbar-inner {
     display: flex;
     justify-content: space-between;
@@ -80,46 +82,46 @@ const NavbarContainer = styled.nav`
     max-width: 1200px;
     margin: 0 auto;
   }
-  
+
   h1 {
     margin: 0;
     font-size: 1.5rem;
-    
+
     a {
       color: white;
       text-decoration: none;
     }
   }
-  
+
   .links {
     display: flex;
   }
-  
+
   ul {
     display: flex;
     list-style: none;
     margin: 0;
     padding: 0;
   }
-  
+
   li {
     margin-left: 1.5rem;
-    
+
     a {
       color: white;
       text-decoration: none;
-      
+
       &:hover {
         text-decoration: underline;
       }
     }
   }
-  
+
   .username {
     color: #f0f0f0;
     font-weight: bold;
   }
-  
+
   .theme-toggle {
     font-size: 1.2rem;
     cursor: pointer;

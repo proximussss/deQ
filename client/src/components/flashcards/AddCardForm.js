@@ -1,28 +1,28 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
 const AddCardForm = ({ onAddCard }) => {
   const [formData, setFormData] = useState({
-    front: '',
-    back: ''
+    front: "",
+    back: "",
   });
 
   const { front, back } = formData;
 
-  const onChange = e => {
+  const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    
+
     if (!front || !back) {
-      alert('Both front and back content are required!');
+      alert("Both front and back content are required!");
       return;
     }
-    
+
     onAddCard(formData);
-    setFormData({ front: '', back: '' });
+    setFormData({ front: "", back: "" });
   };
 
   return (
@@ -51,7 +51,9 @@ const AddCardForm = ({ onAddCard }) => {
             className="form-input"
           />
         </div>
-        <button type="submit" className="submit-btn">Add Card</button>
+        <button type="submit" className="submit-btn">
+          Add Card
+        </button>
       </form>
     </AddCardFormContainer>
   );
@@ -63,21 +65,21 @@ const AddCardFormContainer = styled.div`
   padding: 1.5rem;
   box-shadow: ${({ theme }) => theme.shadow};
   margin-top: 1rem;
-  
+
   h3 {
     margin-bottom: 1rem;
     color: ${({ theme }) => theme.primary};
   }
-  
+
   .form-group {
     margin-bottom: 1rem;
-    
+
     label {
       display: block;
       margin-bottom: 0.5rem;
       font-weight: bold;
     }
-    
+
     .form-input {
       width: 100%;
       min-height: 100px;
@@ -90,7 +92,7 @@ const AddCardFormContainer = styled.div`
       color: ${({ theme }) => theme.text};
     }
   }
-  
+
   .submit-btn {
     width: 100%;
     padding: 0.8rem;
@@ -100,7 +102,7 @@ const AddCardFormContainer = styled.div`
     border-radius: 4px;
     cursor: pointer;
     font-size: 1rem;
-    
+
     &:hover {
       background-color: ${({ theme }) => theme.secondaryHover};
     }

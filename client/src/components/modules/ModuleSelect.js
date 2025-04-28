@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import styled from 'styled-components';
-import { getModules } from '../../actions/module';
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import styled from "styled-components";
+import { getModules } from "../../actions/module";
 
 const ModuleSelect = () => {
   const dispatch = useDispatch();
-  const { modules, loading } = useSelector(state => state.module);
+  const { modules, loading } = useSelector((state) => state.module);
 
   useEffect(() => {
     dispatch(getModules());
@@ -21,7 +21,7 @@ const ModuleSelect = () => {
       <h2>Select a Module</h2>
       <div className="module-grid">
         {modules.length > 0 ? (
-          modules.map(module => (
+          modules.map((module) => (
             <Link
               to={`/module/${module.id}`}
               key={module.id}
@@ -59,12 +59,14 @@ const ModuleSelectContainer = styled.div`
     padding: 2rem;
     text-align: center;
     box-shadow: ${({ theme }) => theme.shadow};
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition:
+      transform 0.3s,
+      box-shadow 0.3s;
     color: ${({ theme }) => theme.primary};
     font-size: 1.2rem;
     font-weight: bold;
     text-decoration: none;
-    
+
     &:hover {
       transform: translateY(-5px);
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);

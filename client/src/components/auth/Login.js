@@ -1,39 +1,39 @@
-import React, { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import styled from 'styled-components';
-import { login, loginWithGoogle } from '../../actions/auth';
-import { GoogleLogin } from 'react-google-login';
+import React, { useState } from "react";
+import { Link, Navigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import styled from "styled-components";
+import { login, loginWithGoogle } from "../../actions/auth";
+import { GoogleLogin } from "react-google-login";
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: "",
   });
 
   const { email, password } = formData;
   const dispatch = useDispatch();
-  const { isAuthenticated, loading } = useSelector(state => state.auth);
+  const { isAuthenticated, loading } = useSelector((state) => state.auth);
 
   // Redirect if logged in
   if (isAuthenticated) {
-    return <Redirect to="/modules" />;
+    return <Navigate to="/modules" />;
   }
 
-  const onChange = e =>
+  const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     dispatch(login(email, password));
   };
 
-  const googleSuccess = res => {
+  const googleSuccess = (res) => {
     dispatch(loginWithGoogle(res.tokenId));
   };
 
-  const googleFailure = error => {
-    console.error('Google Login Error:', error);
+  const googleFailure = (error) => {
+    console.error("Google Login Error:", error);
   };
 
   return (
@@ -65,7 +65,7 @@ const Login = () => {
           Login
         </button>
       </form>
-      
+
       <div className="google-login">
         <p>or</p>
         <GoogleLogin
@@ -73,11 +73,11 @@ const Login = () => {
           buttonText="Login with Google"
           onSuccess={googleSuccess}
           onFailure={googleFailure}
-          cookiePolicy={'single_host_origin'}
+          cookiePolicy={"single_host_origin"}
           redirectUri={window.location.origin}
         />
       </div>
-      
+
       <p className="no-account">
         Don't have an account? <Link to="/register">Register</Link>
       </p>
@@ -92,21 +92,21 @@ const LoginContainer = styled.div`
   background-color: ${({ theme }) => theme.cardBg};
   border-radius: 8px;
   box-shadow: ${({ theme }) => theme.shadow};
-  
+
   h1 {
     margin-bottom: 1rem;
     color: ${({ theme }) => theme.primary};
   }
-  
+
   .lead {
     font-size: 1.1rem;
     margin-bottom: 1.5rem;
   }
-  
+
   .form-group {
     margin-bottom: 1rem;
   }
-  
+
   input {
     width: 100%;
     padding: 0.8rem;
@@ -116,28 +116,28 @@ const LoginContainer = styled.div`
     background-color: ${({ theme }) => theme.cardBg};
     color: ${({ theme }) => theme.text};
   }
-  
+
   button {
     width: 100%;
     padding: 0.8rem;
     margin-top: 0.5rem;
   }
-  
+
   .google-login {
     margin: 1.5rem 0;
     text-align: center;
-    
+
     button {
       margin-top: 0.5rem;
     }
-    
+
     p {
       margin: 0.5rem 0;
       color: ${({ theme }) => theme.text};
       opacity: 0.7;
     }
   }
-  
+
   .no-account {
     margin-top: 1rem;
     text-align: center;

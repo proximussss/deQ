@@ -1,24 +1,15 @@
-import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React from "react";
+import { Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  const { isAuthenticated, loading } = useSelector(state => state.auth);
+const PrivateRoute = ({ component: Component }) => {
+  const { isAuthenticated, loading } = useSelector((state) => state.auth);
 
-  return (
-    <Route
-      {...rest}
-      render={props =>
-        loading ? (
-          <div className="loading-spinner">Loading...</div>
-        ) : isAuthenticated ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to="/login" />
-        )
-      }
-    />
-  );
+  if (loading) {
+    return <div className="loading-spinner">Loading...</div>;
+  }
+
+  return isAuthenticated ? <Component /> : <Navigate to="/login" />;
 };
 
 export default PrivateRoute;

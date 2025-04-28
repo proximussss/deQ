@@ -1,10 +1,10 @@
-import { combineReducers } from 'redux';
-import authReducer from './authReducer';
-import moduleReducer from './moduleReducer';
-import cardReducer from './cardReducer';
-import sessionReducer from './sessionReducer';
-import alertReducer from './alertReducer';
-import themeReducer from './themeReducer';
+import { combineReducers } from "redux";
+import authReducer from "./authReducer";
+import moduleReducer from "./moduleReducer";
+import cardReducer from "./cardReducer";
+import sessionReducer from "./sessionReducer";
+import alertReducer from "./alertReducer";
+import themeReducer from "./themeReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -12,5 +12,5 @@ export default combineReducers({
   card: cardReducer,
   session: sessionReducer,
   alert: alertReducer,
-  theme: themeReducer
+  theme: themeReducer,
 });

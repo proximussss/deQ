@@ -1,34 +1,34 @@
-import React, { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import styled from 'styled-components';
-import { setAlert } from '../../actions/alert';
-import { register } from '../../actions/auth';
+import React, { useState } from "react";
+import { Link, Navigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import styled from "styled-components";
+import { setAlert } from "../../actions/alert";
+import { register } from "../../actions/auth";
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    password2: ''
+    name: "",
+    email: "",
+    password: "",
+    password2: "",
   });
 
   const { name, email, password, password2 } = formData;
   const dispatch = useDispatch();
-  const { isAuthenticated, loading } = useSelector(state => state.auth);
+  const { isAuthenticated, loading } = useSelector((state) => state.auth);
 
   // Redirect if logged in
   if (isAuthenticated) {
-    return <Redirect to="/modules" />;
+    return <Navigate to="/modules" />;
   }
 
-  const onChange = e =>
+  const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     if (password !== password2) {
-      dispatch(setAlert('Passwords do not match', 'danger'));
+      dispatch(setAlert("Passwords do not match", "danger"));
     } else {
       dispatch(register({ name, email, password }));
     }
@@ -99,21 +99,21 @@ const RegisterContainer = styled.div`
   background-color: ${({ theme }) => theme.cardBg};
   border-radius: 8px;
   box-shadow: ${({ theme }) => theme.shadow};
-  
+
   h1 {
     margin-bottom: 1rem;
     color: ${({ theme }) => theme.primary};
   }
-  
+
   .lead {
     font-size: 1.1rem;
     margin-bottom: 1.5rem;
   }
-  
+
   .form-group {
     margin-bottom: 1rem;
   }
-  
+
   input {
     width: 100%;
     padding: 0.8rem;
@@ -123,13 +123,13 @@ const RegisterContainer = styled.div`
     background-color: ${({ theme }) => theme.cardBg};
     color: ${({ theme }) => theme.text};
   }
-  
+
   button {
     width: 100%;
     padding: 0.8rem;
     margin-top: 0.5rem;
   }
-  
+
   .already {
     margin-top: 1rem;
     text-align: center;
